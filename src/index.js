@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express(); 
 const bodyParser = require('body-parser');
+const cron = require('node-cron')
 
 const {PORT} = require('./config/serverConfig');
 
@@ -19,8 +20,13 @@ const setUpAndStartServer = () => {
         //     'This is a testing email',
         //     'Hey, how are you, I hope you like the support'
         // );
+        
+        cron.schedule('*/2 * * * *', () => {
+            console.log('running a task every two minutes');
+        });
 
     });
+    
 }
 
 setUpAndStartServer();
